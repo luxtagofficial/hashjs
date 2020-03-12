@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Choose File and Hash It</h2>
+
+<form onsubmit="showHash();return false;">
+    <input type="file" id="fileForUpload" name="filename">
+    <input type="submit" value="Show Hash of The File">
+</form>
+
+<p id="demo"></p>
+
+<script type="text/javascript" src="../../dist/index.min.js"></script>
+<script>
+    function showHash() {
+        const file = document.getElementById("fileForUpload").files[0];
+        if (file) {
+            var reader = new FileReader();
+            reader.readAsText(file, "UTF-8");
+            reader.onload = function (evt) {
+                document.getElementById("demo").innerHTML = hashjs(evt.target.result);
+            }
+            reader.onerror = function (evt) {
+                document.getElementById("demo").innerHTML = "error reading file";
+            }
+        } else {
+            document.getElementById("demo").innerHTML = "You have to choose a file first";
+        }
+    }
+</script>
+
+</body>
+</html> 
